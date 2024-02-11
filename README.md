@@ -1,2 +1,1 @@
-# NutriFit
 PhoenixHacks
