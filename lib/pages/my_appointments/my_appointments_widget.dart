@@ -128,7 +128,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                         'appointmentPerson',
                         isEqualTo: currentUserReference,
                       )
-                      .orderBy('appointmentTime'),
+                      .orderBy('mealTime', descending: true),
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
