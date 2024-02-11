@@ -73,7 +73,6 @@ class InventoryModel extends FlutterFlowModel<InventoryWidget> {
     return controller
       ..addPageRequestListener(
         (nextPageMarker) => queryIngredientsActualRecordPage(
-          queryBuilder: (_) => listViewPagingQuery ??= query,
           nextPageMarker: nextPageMarker,
           streamSubscriptions: listViewStreamSubscriptions,
           controller: controller,

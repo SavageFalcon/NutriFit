@@ -36,11 +36,17 @@ class IngredientsActualRecord extends FirestoreRecord {
   bool get needsProcessing => _needsProcessing ?? false;
   bool hasNeedsProcessing() => _needsProcessing != null;
 
+  // "name" field.
+  String? _name;
+  String get name => _name ?? '';
+  bool hasName() => _name != null;
+
   void _initializeFields() {
     _person = snapshotData['person'] as DocumentReference?;
     _ingredient = snapshotData['ingredient'] as String?;
     _time = snapshotData['time'] as DateTime?;
     _needsProcessing = snapshotData['needsProcessing'] as bool?;
+    _name = snapshotData['name'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -83,6 +89,7 @@ Map<String, dynamic> createIngredientsActualRecordData({
   String? ingredient,
   DateTime? time,
   bool? needsProcessing,
+  String? name,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -90,6 +97,7 @@ Map<String, dynamic> createIngredientsActualRecordData({
       'ingredient': ingredient,
       'time': time,
       'needsProcessing': needsProcessing,
+      'name': name,
     }.withoutNulls,
   );
 
@@ -105,12 +113,13 @@ class IngredientsActualRecordDocumentEquality
     return e1?.person == e2?.person &&
         e1?.ingredient == e2?.ingredient &&
         e1?.time == e2?.time &&
-        e1?.needsProcessing == e2?.needsProcessing;
+        e1?.needsProcessing == e2?.needsProcessing &&
+        e1?.name == e2?.name;
   }
 
   @override
   int hash(IngredientsActualRecord? e) => const ListEquality()
-      .hash([e?.person, e?.ingredient, e?.time, e?.needsProcessing]);
+      .hash([e?.person, e?.ingredient, e?.time, e?.needsProcessing, e?.name]);
 
   @override
   bool isValidKey(Object? o) => o is IngredientsActualRecord;

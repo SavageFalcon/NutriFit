@@ -172,8 +172,7 @@ class _InventoryWidgetState extends State<InventoryWidget> {
                 child: PagedListView<DocumentSnapshot<Object?>?,
                     IngredientsActualRecord>(
                   pagingController: _model.setListViewController(
-                    IngredientsActualRecord.collection
-                        .orderBy('time', descending: true),
+                    IngredientsActualRecord.collection,
                   ),
                   padding: EdgeInsets.zero,
                   reverse: false,
@@ -235,8 +234,7 @@ class _InventoryWidgetState extends State<InventoryWidget> {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        listViewIngredientsActualRecord
-                                            .ingredient,
+                                        listViewIngredientsActualRecord.name,
                                         style: FlutterFlowTheme.of(context)
                                             .headlineSmall,
                                       ),
@@ -252,7 +250,7 @@ class _InventoryWidgetState extends State<InventoryWidget> {
                                             .delete();
                                       },
                                       child: Icon(
-                                        Icons.chevron_right_rounded,
+                                        Icons.restore_from_trash_rounded,
                                         color: FlutterFlowTheme.of(context)
                                             .grayLight,
                                         size: 24.0,
