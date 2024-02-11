@@ -46,10 +46,20 @@ class UsersRecord extends FirestoreRecord {
   String get ailments => _ailments ?? '';
   bool hasAilments() => _ailments != null;
 
-  // "location" field.
-  LatLng? _location;
-  LatLng? get location => _location;
-  bool hasLocation() => _location != null;
+  // "created_time" field.
+  DateTime? _createdTime;
+  DateTime? get createdTime => _createdTime;
+  bool hasCreatedTime() => _createdTime != null;
+
+  // "userSex" field.
+  String? _userSex;
+  String get userSex => _userSex ?? '';
+  bool hasUserSex() => _userSex != null;
+
+  // "weight" field.
+  int? _weight;
+  int get weight => _weight ?? 0;
+  bool hasWeight() => _weight != null;
 
   // "phone_number" field.
   String? _phoneNumber;
@@ -61,16 +71,6 @@ class UsersRecord extends FirestoreRecord {
   String get photoUrl => _photoUrl ?? '';
   bool hasPhotoUrl() => _photoUrl != null;
 
-  // "created_time" field.
-  DateTime? _createdTime;
-  DateTime? get createdTime => _createdTime;
-  bool hasCreatedTime() => _createdTime != null;
-
-  // "userSex" field.
-  String? _userSex;
-  String get userSex => _userSex ?? '';
-  bool hasUserSex() => _userSex != null;
-
   void _initializeFields() {
     _displayName = snapshotData['display_name'] as String?;
     _email = snapshotData['email'] as String?;
@@ -78,11 +78,11 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _age = castToType<int>(snapshotData['age']);
     _ailments = snapshotData['ailments'] as String?;
-    _location = snapshotData['location'] as LatLng?;
-    _phoneNumber = snapshotData['phone_number'] as String?;
-    _photoUrl = snapshotData['photo_url'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _userSex = snapshotData['userSex'] as String?;
+    _weight = castToType<int>(snapshotData['weight']);
+    _phoneNumber = snapshotData['phone_number'] as String?;
+    _photoUrl = snapshotData['photo_url'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -125,11 +125,11 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   int? age,
   String? ailments,
-  LatLng? location,
-  String? phoneNumber,
-  String? photoUrl,
   DateTime? createdTime,
   String? userSex,
+  int? weight,
+  String? phoneNumber,
+  String? photoUrl,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -139,11 +139,11 @@ Map<String, dynamic> createUsersRecordData({
       'uid': uid,
       'age': age,
       'ailments': ailments,
-      'location': location,
-      'phone_number': phoneNumber,
-      'photo_url': photoUrl,
       'created_time': createdTime,
       'userSex': userSex,
+      'weight': weight,
+      'phone_number': phoneNumber,
+      'photo_url': photoUrl,
     }.withoutNulls,
   );
 
@@ -161,11 +161,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.uid == e2?.uid &&
         e1?.age == e2?.age &&
         e1?.ailments == e2?.ailments &&
-        e1?.location == e2?.location &&
-        e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.photoUrl == e2?.photoUrl &&
         e1?.createdTime == e2?.createdTime &&
-        e1?.userSex == e2?.userSex;
+        e1?.userSex == e2?.userSex &&
+        e1?.weight == e2?.weight &&
+        e1?.phoneNumber == e2?.phoneNumber &&
+        e1?.photoUrl == e2?.photoUrl;
   }
 
   @override
@@ -176,11 +176,11 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.uid,
         e?.age,
         e?.ailments,
-        e?.location,
-        e?.phoneNumber,
-        e?.photoUrl,
         e?.createdTime,
-        e?.userSex
+        e?.userSex,
+        e?.weight,
+        e?.phoneNumber,
+        e?.photoUrl
       ]);
 
   @override

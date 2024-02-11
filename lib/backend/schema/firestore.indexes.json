@@ -13,20 +13,6 @@
           "order": "DESCENDING"
         }
       ]
-    },
-    {
-      "collectionGroup": "appointments",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "appointmentPerson",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "appointmentTime",
-          "order": "ASCENDING"
-        }
-      ]
     }
   ]
 }
