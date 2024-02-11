@@ -3,6 +3,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/components/add_reciept/add_reciept_widget.dart';
+import '/pages/components/addfridge/addfridge_widget.dart';
 import '/pages/components/book_appointment/book_appointment_widget.dart';
 import '/pages/components/main_logo/main_logo_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -206,15 +208,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 40.0,
-                              height: 40.0,
-                              child: SpinKitPumpingHeart(
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 40.0,
-                              ),
-                            ),
+                          return Image.asset(
+                            '',
                           );
                         }
                         List<AppointmentsRecord>
@@ -619,7 +614,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    await launchURL('tel:1234567890');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding:
+                                              MediaQuery.viewInsetsOf(context),
+                                          child: AddRecieptWidget(),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
                                   },
                                   child: Material(
                                     color: Colors.transparent,
@@ -695,8 +702,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    await launchURL(
-                                        'mailto:contact@health.ai.demo');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding:
+                                              MediaQuery.viewInsetsOf(context),
+                                          child: AddfridgeWidget(),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
                                   },
                                   child: Material(
                                     color: Colors.transparent,
