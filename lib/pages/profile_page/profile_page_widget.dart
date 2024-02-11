@@ -1,11 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/empty_list/empty_list_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/components/empty_list/empty_list_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -322,7 +322,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 8.0, 0.0, 0.0),
                                   child: Text(
-                                    profilePageUsersRecord.email,
+                                    'weight',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -378,7 +378,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Next Appointment',
+                                        'Calories Today',
                                         textAlign: TextAlign.start,
                                         style: FlutterFlowTheme.of(context)
                                             .bodySmall,
@@ -679,7 +679,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            'Past Appointments',
+                            'Trends:',
                             style: FlutterFlowTheme.of(context).bodySmall,
                           ),
                         ],
@@ -733,225 +733,153 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                               return Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 8.0),
-                                child: StreamBuilder<List<AppointmentsRecord>>(
-                                  stream: queryAppointmentsRecord(
-                                    singleRecord: true,
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 4.0,
+                                        color: Color(0x230F1113),
+                                        offset: Offset(0.0, 2.0),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 40.0,
-                                          height: 40.0,
-                                          child: SpinKitPumpingHeart(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 40.0,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<AppointmentsRecord>
-                                        appointmentCardAppointmentsRecordList =
-                                        snapshot.data!;
-                                    // Return an empty Container when the item does not exist.
-                                    if (snapshot.data!.isEmpty) {
-                                      return Container();
-                                    }
-                                    final appointmentCardAppointmentsRecord =
-                                        appointmentCardAppointmentsRecordList
-                                                .isNotEmpty
-                                            ? appointmentCardAppointmentsRecordList
-                                                .first
-                                            : null;
-                                    return InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed(
-                                          'appointmentDetailsProfile',
-                                          queryParameters: {
-                                            'appointmentDetails':
-                                                serializeParam(
-                                              listViewAppointmentsRecord
-                                                  .reference,
-                                              ParamType.DocumentReference,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                      child: Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 4.0,
-                                              color: Color(0x230F1113),
-                                              offset: Offset(0.0, 2.0),
-                                            )
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(12.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  4.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        listViewAppointmentsRecord
-                                                            .appointmentType,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineSmall,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Icon(
-                                                    Icons.chevron_right_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .grayLight,
-                                                    size: 24.0,
-                                                  ),
-                                                ],
-                                              ),
-                                              Padding(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 8.0, 0.0, 0.0),
+                                                        4.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  listViewAppointmentsRecord
+                                                      .appointmentType,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .headlineSmall,
+                                                ),
+                                              ),
+                                            ),
+                                            Icon(
+                                              Icons.chevron_right_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .grayLight,
+                                              size: 24.0,
+                                            ),
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 8.0, 0.0, 0.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Card(
+                                                clipBehavior:
+                                                    Clip.antiAliasWithSaveLayer,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
-                                                    Card(
-                                                      clipBehavior: Clip
-                                                          .antiAliasWithSaveLayer,
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20.0),
-                                                      ),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        8.0,
-                                                                        4.0,
-                                                                        8.0,
-                                                                        4.0),
-                                                            child: Text(
-                                                              dateTimeFormat(
-                                                                  'MMMEd',
-                                                                  listViewAppointmentsRecord
-                                                                      .appointmentTime!),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodySmall,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0),
-                                                            child: Text(
-                                                              dateTimeFormat(
-                                                                  'jm',
-                                                                  listViewAppointmentsRecord
-                                                                      .appointmentTime!),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
-                                                            ),
-                                                          ),
-                                                        ],
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8.0,
+                                                                  4.0,
+                                                                  8.0,
+                                                                  4.0),
+                                                      child: Text(
+                                                        dateTimeFormat(
+                                                            'MMMEd',
+                                                            listViewAppointmentsRecord
+                                                                .appointmentTime!),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall,
                                                       ),
                                                     ),
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
                                                                   8.0,
-                                                                  0.0,
-                                                                  0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        'For',
+                                                        dateTimeFormat(
+                                                            'jm',
+                                                            listViewAppointmentsRecord
+                                                                .appointmentTime!),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .bodyMedium,
                                                       ),
                                                     ),
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    4.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          listViewAppointmentsRecord
-                                                              .appointmentName,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondary,
-                                                              ),
-                                                        ),
-                                                      ),
-                                                    ),
                                                   ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        8.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  'For',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          4.0, 0.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    listViewAppointmentsRecord
+                                                        .appointmentName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondary,
+                                                        ),
+                                                  ),
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               );
                             },

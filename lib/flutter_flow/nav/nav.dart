@@ -161,19 +161,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : FindSymptomsWidget(),
         ),
         FFRoute(
-          name: 'appointmentDetailsProfile',
-          path: '/appointmentDetailsProfile',
-          builder: (context, params) => AppointmentDetailsProfileWidget(
-            appointmentDetails: params.getParam('appointmentDetails',
-                ParamType.DocumentReference, false, ['appointments']),
-          ),
-        ),
-        FFRoute(
           name: 'Inventory',
           path: '/inventory',
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'Inventory')
               : InventoryWidget(),
+        ),
+        FFRoute(
+          name: 'Trends',
+          path: '/trends',
+          builder: (context, params) => TrendsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

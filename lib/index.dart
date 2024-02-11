@@ -13,6 +13,5 @@ export '/pages/appointment_details/appointment_details_widget.dart'
 export '/pages/profile_page/profile_page_widget.dart' show ProfilePageWidget;
 export '/pages/edit_profile/edit_profile_widget.dart' show EditProfileWidget;
 export '/pages/find_symptoms/find_symptoms_widget.dart' show FindSymptomsWidget;
-export '/pages/appointment_details_profile/appointment_details_profile_widget.dart'
-    show AppointmentDetailsProfileWidget;
 export '/pages/inventory/inventory_widget.dart' show InventoryWidget;
+export '/pages/trends/trends_widget.dart' show TrendsWidget;

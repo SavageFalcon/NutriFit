@@ -1,7 +1,7 @@
-import '/components/book_appointment/book_appointment_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/components/book_appointment/book_appointment_widget.dart';
 import 'empty_list_widget.dart' show EmptyListWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

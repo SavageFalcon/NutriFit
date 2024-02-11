@@ -1,7 +1,7 @@
-import '/components/main_logo/main_logo_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/components/main_logo/main_logo_widget.dart';
 import 'find_symptoms_widget.dart' show FindSymptomsWidget;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
