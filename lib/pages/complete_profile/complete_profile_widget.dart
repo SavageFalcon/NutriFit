@@ -31,58 +31,6 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final animationsMap = {
-    'circleImageOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.bounceOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.bounceOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 19.0),
-          end: Offset(0.0, 0.0),
-        ),
-        ScaleEffect(
-          curve: Curves.bounceOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(1.0, 0.0),
-          end: Offset(1.0, 1.0),
-        ),
-      ],
-    ),
-    'textOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 50.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 50.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 20.0),
-          end: Offset(0.0, 0.0),
-        ),
-        ScaleEffect(
-          curve: Curves.easeInOut,
-          delay: 50.ms,
-          duration: 600.ms,
-          begin: Offset(1.0, 0.0),
-          end: Offset(1.0, 1.0),
-        ),
-      ],
-    ),
     'textFieldOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
@@ -161,7 +109,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
         ),
       ],
     ),
-    'textOnPageLoadAnimation2': AnimationInfo(
+    'textOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         FadeEffect(
@@ -213,33 +161,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
         ),
       ],
     ),
-    'buttonOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.bounceOut,
-          delay: 350.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.bounceOut,
-          delay: 350.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 40.0),
-          end: Offset(0.0, 0.0),
-        ),
-        ScaleEffect(
-          curve: Curves.bounceOut,
-          delay: 350.ms,
-          duration: 600.ms,
-          begin: Offset(1.0, 0.0),
-          end: Offset(1.0, 1.0),
-        ),
-      ],
-    ),
-    'buttonOnPageLoadAnimation2': AnimationInfo(
+    'buttonOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         FadeEffect(
@@ -287,6 +209,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -363,23 +287,6 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Container(
-                        width: 120.0,
-                        height: 120.0,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.asset(
-                          'assets/images/uiAvatar@2x.png',
-                        ),
-                      ).animateOnPageLoad(
-                          animationsMap['circleImageOnPageLoadAnimation']!),
-                      Text(
-                        'Upload a photo for us to easily identify you.',
-                        style: FlutterFlowTheme.of(context).bodyMedium,
-                      ).animateOnPageLoad(
-                          animationsMap['textOnPageLoadAnimation1']!),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 0.0),
@@ -547,7 +454,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                               'Your Birth Sex',
                               style: FlutterFlowTheme.of(context).bodyMedium,
                             ).animateOnPageLoad(
-                                animationsMap['textOnPageLoadAnimation2']!),
+                                animationsMap['textOnPageLoadAnimation']!),
                           ],
                         ),
                       ),
@@ -588,51 +495,6 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                           ],
                         ),
                       ),
-                      if (responsiveVisibility(
-                        context: context,
-                        phone: false,
-                        tablet: false,
-                        tabletLandscape: false,
-                        desktop: false,
-                      ))
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 24.0, 0.0, 0.0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              context.pushNamed('addAnotherProfile');
-                            },
-                            text: 'Add Another Profile',
-                            icon: Icon(
-                              Icons.add_rounded,
-                              size: 15.0,
-                            ),
-                            options: FFButtonOptions(
-                              width: 230.0,
-                              height: 50.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                  ),
-                              elevation: 3.0,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(40.0),
-                            ),
-                          ).animateOnPageLoad(
-                              animationsMap['buttonOnPageLoadAnimation1']!),
-                        ),
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
@@ -686,7 +548,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                                 borderRadius: BorderRadius.circular(40.0),
                               ),
                             ).animateOnPageLoad(
-                                animationsMap['buttonOnPageLoadAnimation2']!);
+                                animationsMap['buttonOnPageLoadAnimation']!);
                           },
                         ),
                       ),

@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'login_page_model.dart';
@@ -47,6 +48,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
 
     _model.passwordConfirmController ??= TextEditingController();
     _model.passwordConfirmFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -98,7 +101,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 100.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -117,15 +120,20 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                     height: 130.0,
                                     fit: BoxFit.fitHeight,
                                   ),
-                                if (!(Theme.of(context).brightness ==
-                                    Brightness.dark))
-                                  Image.asset(
-                                    'assets/images/logo_darkFull@2x.png',
-                                    width: 200.0,
-                                    height: 130.0,
-                                    fit: BoxFit.fitHeight,
-                                  ),
                               ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 25.0, 0.0, 0.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/fit.png',
+                                width: 250.0,
+                                height: 200.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           Expanded(
@@ -972,6 +980,52 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                   ),
                                 ),
                               ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 16.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                GoRouter.of(context).prepareAuthEvent();
+                                final user =
+                                    await authManager.signInWithGoogle(context);
+                                if (user == null) {
+                                  return;
+                                }
+
+                                context.goNamedAuth(
+                                    'homePage', context.mounted);
+                              },
+                              text: 'Continue with Google',
+                              icon: FaIcon(
+                                FontAwesomeIcons.google,
+                                size: 20.0,
+                              ),
+                              options: FFButtonOptions(
+                                width: 230.0,
+                                height: 44.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                elevation: 0.0,
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(40.0),
+                                hoverColor: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                              ),
                             ),
                           ),
                         ],

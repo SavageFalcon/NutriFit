@@ -104,16 +104,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ForgotPasswordWidget(),
         ),
         FFRoute(
-          name: 'addAnotherProfile',
-          path: '/addAnotherProfile',
-          builder: (context, params) => AddAnotherProfileWidget(),
-        ),
-        FFRoute(
-          name: 'onboarding',
-          path: '/onboarding',
-          builder: (context, params) => OnboardingWidget(),
-        ),
-        FFRoute(
           name: 'homePage',
           path: '/homePage',
           asyncParams: {
@@ -134,7 +124,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'appointmentDetails',
-          path: '/appointmentDetails',
+          path: '/mealDetails',
           builder: (context, params) => AppointmentDetailsWidget(
             appointmentDetails: params.getParam('appointmentDetails',
                 ParamType.DocumentReference, false, ['appointments']),
@@ -160,18 +150,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'findSymptoms',
-          path: '/findSymptoms',
+          path: '/findRecipes',
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'findSymptoms')
               : FindSymptomsWidget(),
         ),
         FFRoute(
-          name: 'appointmentDetailsProfile',
-          path: '/appointmentDetailsProfile',
-          builder: (context, params) => AppointmentDetailsProfileWidget(
-            appointmentDetails: params.getParam('appointmentDetails',
-                ParamType.DocumentReference, false, ['appointments']),
-          ),
+          name: 'Inventory',
+          path: '/inventory',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Inventory')
+              : InventoryWidget(),
+        ),
+        FFRoute(
+          name: 'trends',
+          path: '/trends',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'trends')
+              : TrendsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

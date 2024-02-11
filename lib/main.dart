@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
 
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
-    userStream = yetanotherhealthdemoFirebaseUserStream()
+    userStream = nurafitFirebaseUserStream()
       ..listen((user) => _appStateNotifier.update(user));
     jwtTokenStream.listen((_) {});
     Future.delayed(
@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'yetanotherhealthdemo',
+      title: 'Nurafit',
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -120,7 +120,9 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'homePage': HomePageWidget(),
       'myAppointments': MyAppointmentsWidget(),
+      'Inventory': InventoryWidget(),
       'findSymptoms': FindSymptomsWidget(),
+      'trends': TrendsWidget(),
       'profilePage': ProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -166,14 +168,26 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.favorite_border_rounded,
+              Icons.format_list_bulleted,
               size: 24.0,
             ),
-            activeIcon: Icon(
-              Icons.favorite_rounded,
+            label: '.',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.manage_search,
               size: 24.0,
             ),
             label: '•',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.auto_graph_sharp,
+              size: 24.0,
+            ),
+            label: '.',
             tooltip: '',
           ),
           BottomNavigationBarItem(

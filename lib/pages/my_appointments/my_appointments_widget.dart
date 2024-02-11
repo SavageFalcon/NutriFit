@@ -1,11 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/book_appointment/book_appointment_widget.dart';
-import '/components/empty_list/empty_list_widget.dart';
-import '/components/main_logo/main_logo_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/components/book_appointment/book_appointment_widget.dart';
+import '/pages/components/empty_list/empty_list_widget.dart';
+import '/pages/components/main_logo/main_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -30,6 +30,8 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyAppointmentsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -85,7 +87,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: false,
         title: Text(
-          'Appointments',
+          'Meals',
           style: FlutterFlowTheme.of(context).displaySmall,
         ),
         actions: [
@@ -112,7 +114,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    'My Appointments',
+                    'Most to Leat Recent:',
                     style: FlutterFlowTheme.of(context).bodySmall,
                   ),
                 ],
@@ -126,7 +128,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                         'appointmentPerson',
                         isEqualTo: currentUserReference,
                       )
-                      .orderBy('appointmentTime'),
+                      .orderBy('mealTime', descending: true),
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -228,7 +230,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                                                   .fromSTEB(4.0, 0.0, 0.0, 0.0),
                                               child: Text(
                                                 listViewAppointmentsRecord
-                                                    .appointmentType,
+                                                    .mealName,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .headlineSmall,
@@ -250,7 +252,13 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                                                   4.0, 4.0, 4.0, 0.0),
                                           child: Text(
                                             valueOrDefault<String>(
-                                              'For ${appointmentCardAppointmentsRecord.appointmentName}',
+                                              '${formatNumber(
+                                                appointmentCardAppointmentsRecord
+                                                    .calorieCount,
+                                                formatType: FormatType.decimal,
+                                                decimalType:
+                                                    DecimalType.automatic,
+                                              )}Calories',
                                               'For AppointmentName',
                                             ),
                                             style: FlutterFlowTheme.of(context)
@@ -292,27 +300,11 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                                                       dateTimeFormat(
                                                           'MMMEd',
                                                           listViewAppointmentsRecord
-                                                              .appointmentTime!),
+                                                              .mealTime!),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyMedium,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(4.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: Text(
-                                                      dateTimeFormat(
-                                                          'jm',
-                                                          appointmentCardAppointmentsRecord
-                                                              .appointmentTime!),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall,
                                                     ),
                                                   ),
                                                 ],

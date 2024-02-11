@@ -46,6 +46,46 @@ class AppointmentsRecord extends FirestoreRecord {
   String get appointmentEmail => _appointmentEmail ?? '';
   bool hasAppointmentEmail() => _appointmentEmail != null;
 
+  // "mealName" field.
+  String? _mealName;
+  String get mealName => _mealName ?? '';
+  bool hasMealName() => _mealName != null;
+
+  // "calorieCount" field.
+  int? _calorieCount;
+  int get calorieCount => _calorieCount ?? 0;
+  bool hasCalorieCount() => _calorieCount != null;
+
+  // "mealTime" field.
+  DateTime? _mealTime;
+  DateTime? get mealTime => _mealTime;
+  bool hasMealTime() => _mealTime != null;
+
+  // "carbCount" field.
+  int? _carbCount;
+  int get carbCount => _carbCount ?? 0;
+  bool hasCarbCount() => _carbCount != null;
+
+  // "proteinCount" field.
+  int? _proteinCount;
+  int get proteinCount => _proteinCount ?? 0;
+  bool hasProteinCount() => _proteinCount != null;
+
+  // "mealDesc" field.
+  String? _mealDesc;
+  String get mealDesc => _mealDesc ?? '';
+  bool hasMealDesc() => _mealDesc != null;
+
+  // "mealImage" field.
+  String? _mealImage;
+  String get mealImage => _mealImage ?? '';
+  bool hasMealImage() => _mealImage != null;
+
+  // "needsProcessing" field.
+  bool? _needsProcessing;
+  bool get needsProcessing => _needsProcessing ?? false;
+  bool hasNeedsProcessing() => _needsProcessing != null;
+
   void _initializeFields() {
     _appointmentName = snapshotData['appointmentName'] as String?;
     _appointmentDescription = snapshotData['appointmentDescription'] as String?;
@@ -54,6 +94,14 @@ class AppointmentsRecord extends FirestoreRecord {
     _appointmentTime = snapshotData['appointmentTime'] as DateTime?;
     _appointmentType = snapshotData['appointmentType'] as String?;
     _appointmentEmail = snapshotData['appointmentEmail'] as String?;
+    _mealName = snapshotData['mealName'] as String?;
+    _calorieCount = castToType<int>(snapshotData['calorieCount']);
+    _mealTime = snapshotData['mealTime'] as DateTime?;
+    _carbCount = castToType<int>(snapshotData['carbCount']);
+    _proteinCount = castToType<int>(snapshotData['proteinCount']);
+    _mealDesc = snapshotData['mealDesc'] as String?;
+    _mealImage = snapshotData['mealImage'] as String?;
+    _needsProcessing = snapshotData['needsProcessing'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -97,6 +145,14 @@ Map<String, dynamic> createAppointmentsRecordData({
   DateTime? appointmentTime,
   String? appointmentType,
   String? appointmentEmail,
+  String? mealName,
+  int? calorieCount,
+  DateTime? mealTime,
+  int? carbCount,
+  int? proteinCount,
+  String? mealDesc,
+  String? mealImage,
+  bool? needsProcessing,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -106,6 +162,14 @@ Map<String, dynamic> createAppointmentsRecordData({
       'appointmentTime': appointmentTime,
       'appointmentType': appointmentType,
       'appointmentEmail': appointmentEmail,
+      'mealName': mealName,
+      'calorieCount': calorieCount,
+      'mealTime': mealTime,
+      'carbCount': carbCount,
+      'proteinCount': proteinCount,
+      'mealDesc': mealDesc,
+      'mealImage': mealImage,
+      'needsProcessing': needsProcessing,
     }.withoutNulls,
   );
 
@@ -123,7 +187,15 @@ class AppointmentsRecordDocumentEquality
         e1?.appointmentPerson == e2?.appointmentPerson &&
         e1?.appointmentTime == e2?.appointmentTime &&
         e1?.appointmentType == e2?.appointmentType &&
-        e1?.appointmentEmail == e2?.appointmentEmail;
+        e1?.appointmentEmail == e2?.appointmentEmail &&
+        e1?.mealName == e2?.mealName &&
+        e1?.calorieCount == e2?.calorieCount &&
+        e1?.mealTime == e2?.mealTime &&
+        e1?.carbCount == e2?.carbCount &&
+        e1?.proteinCount == e2?.proteinCount &&
+        e1?.mealDesc == e2?.mealDesc &&
+        e1?.mealImage == e2?.mealImage &&
+        e1?.needsProcessing == e2?.needsProcessing;
   }
 
   @override
@@ -133,7 +205,15 @@ class AppointmentsRecordDocumentEquality
         e?.appointmentPerson,
         e?.appointmentTime,
         e?.appointmentType,
-        e?.appointmentEmail
+        e?.appointmentEmail,
+        e?.mealName,
+        e?.calorieCount,
+        e?.mealTime,
+        e?.carbCount,
+        e?.proteinCount,
+        e?.mealDesc,
+        e?.mealImage,
+        e?.needsProcessing
       ]);
 
   @override
