@@ -679,7 +679,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            'Trends:',
+                            'Trends: WGHT. CAL BURNED. WO',
                             style: FlutterFlowTheme.of(context).bodySmall,
                           ),
                         ],

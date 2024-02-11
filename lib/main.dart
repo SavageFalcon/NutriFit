@@ -122,6 +122,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'myAppointments': MyAppointmentsWidget(),
       'Inventory': InventoryWidget(),
       'findSymptoms': FindSymptomsWidget(),
+      'trends': TrendsWidget(),
       'profilePage': ProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -179,6 +180,14 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24.0,
             ),
             label: '•',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.auto_graph_sharp,
+              size: 24.0,
+            ),
+            label: '.',
             tooltip: '',
           ),
           BottomNavigationBarItem(

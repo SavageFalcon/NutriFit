@@ -4,7 +4,6 @@ export '/pages/complete_profile/complete_profile_widget.dart'
     show CompleteProfileWidget;
 export '/pages/forgot_password/forgot_password_widget.dart'
     show ForgotPasswordWidget;
-export '/pages/onboarding/onboarding_widget.dart' show OnboardingWidget;
 export '/pages/home_page/home_page_widget.dart' show HomePageWidget;
 export '/pages/my_appointments/my_appointments_widget.dart'
     show MyAppointmentsWidget;

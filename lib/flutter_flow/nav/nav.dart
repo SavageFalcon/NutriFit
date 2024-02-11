@@ -104,11 +104,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ForgotPasswordWidget(),
         ),
         FFRoute(
-          name: 'onboarding',
-          path: '/onboarding',
-          builder: (context, params) => OnboardingWidget(),
-        ),
-        FFRoute(
           name: 'homePage',
           path: '/homePage',
           asyncParams: {
@@ -170,7 +165,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'trends',
           path: '/trends',
-          builder: (context, params) => TrendsWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'trends')
+              : TrendsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
