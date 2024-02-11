@@ -12,7 +12,20 @@
           "package_name": "com.flutterflow.healthai"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "617899167243-8gljb4at34ifsh8416qmbq43afv8t09s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflow.healthai",
+            "certificate_hash": "6db9f35b3216af7865b7710320d14e5c97a66bad"
+          }
+        },
+        {
+          "client_id": "617899167243-ep6upve1deuv6pkvhp2kcdo3g4in405f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBrltXtRYP_LlzRdoktpaHoLmqShzwsClo"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617899167243-ep6upve1deuv6pkvhp2kcdo3g4in405f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "617899167243-j1d0ntgts9a9l2ulmk3vfkqnqm99tt2j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.healthai"
+              }
+            }
+          ]
         }
       }
     }
