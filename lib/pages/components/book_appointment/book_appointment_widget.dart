@@ -561,6 +561,9 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                           mealDesc: _model
                                               .problemDescriptionController
                                               .text,
+                                          mealName:
+                                              _model.personsNameController.text,
+                                          appointmentPerson: widget.userProfile,
                                         ),
                                         ...mapToFirestore(
                                           {

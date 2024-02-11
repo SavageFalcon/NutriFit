@@ -168,7 +168,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : InventoryWidget(),
         ),
         FFRoute(
-          name: 'Trends',
+          name: 'trends',
           path: '/trends',
           builder: (context, params) => TrendsWidget(),
         )

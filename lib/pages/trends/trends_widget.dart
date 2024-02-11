@@ -58,7 +58,7 @@ class _TrendsWidgetState extends State<TrendsWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            'Weight&cal graph, addweight & addcal -- add workout too????',
+            'Graphs wt&cal+calburned, add WO & weight',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,

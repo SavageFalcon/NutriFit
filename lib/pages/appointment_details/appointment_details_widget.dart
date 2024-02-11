@@ -364,7 +364,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                         },
                       ).then((value) => safeSetState(() {}));
                     },
-                    text: 'Reschedule',
+                    text: 'Edit',
                     options: FFButtonOptions(
                       width: 300.0,
                       height: 50.0,
