@@ -412,7 +412,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                           );
                           context.pop();
                         },
-                        text: 'Cancel Appointment',
+                        text: 'Cancel',
                         options: FFButtonOptions(
                           width: 230.0,
                           height: 50.0,
@@ -439,6 +439,10 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     ),
                   ],
                 ),
+              ),
+              Text(
+                appointmentDetailsAppointmentsRecord.recipieList,
+                style: FlutterFlowTheme.of(context).bodyMedium,
               ),
             ],
           ),

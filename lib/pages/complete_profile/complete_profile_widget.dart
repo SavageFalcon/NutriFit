@@ -194,13 +194,16 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
     super.initState();
     _model = createModel(context, () => CompleteProfileModel());
 
-    _model.yourNameController ??= TextEditingController();
+    _model.yourNameController ??=
+        TextEditingController(text: currentUserDisplayName);
     _model.yourNameFocusNode ??= FocusNode();
 
-    _model.yourAgeController ??= TextEditingController();
+    _model.yourAgeController ??= TextEditingController(
+        text: valueOrDefault(currentUserDocument?.age, 0).toString());
     _model.yourAgeFocusNode ??= FocusNode();
 
-    _model.ailmentsController ??= TextEditingController();
+    _model.ailmentsController ??= TextEditingController(
+        text: valueOrDefault(currentUserDocument?.ailments, ''));
     _model.ailmentsFocusNode ??= FocusNode();
 
     setupAnimations(
@@ -290,159 +293,168 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 0.0),
-                        child: TextFormField(
-                          controller: _model.yourNameController,
-                          focusNode: _model.yourNameFocusNode,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Your Name',
-                            labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                            hintText: 'Please enter a valid number...',
-                            hintStyle: FlutterFlowTheme.of(context).bodySmall,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                        child: AuthUserStreamWidget(
+                          builder: (context) => TextFormField(
+                            controller: _model.yourNameController,
+                            focusNode: _model.yourNameFocusNode,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Your Name',
+                              labelStyle:
+                                  FlutterFlowTheme.of(context).bodySmall,
+                              hintText: 'Please enter your name...',
+                              hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 24.0, 20.0, 24.0),
                             ),
-                            filled: true,
-                            fillColor:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 24.0, 20.0, 24.0),
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          validator: _model.yourNameControllerValidator
-                              .asValidator(context),
-                        ).animateOnPageLoad(
-                            animationsMap['textFieldOnPageLoadAnimation1']!),
+                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            validator: _model.yourNameControllerValidator
+                                .asValidator(context),
+                          ).animateOnPageLoad(
+                              animationsMap['textFieldOnPageLoadAnimation1']!),
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 0.0),
-                        child: TextFormField(
-                          controller: _model.yourAgeController,
-                          focusNode: _model.yourAgeFocusNode,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Your Age',
-                            labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                            hintText: 'i.e. 34',
-                            hintStyle: FlutterFlowTheme.of(context).bodySmall,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                        child: AuthUserStreamWidget(
+                          builder: (context) => TextFormField(
+                            controller: _model.yourAgeController,
+                            focusNode: _model.yourAgeFocusNode,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Your Age',
+                              labelStyle:
+                                  FlutterFlowTheme.of(context).bodySmall,
+                              hintText: 'i.e. 34',
+                              hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 24.0, 20.0, 24.0),
                             ),
-                            filled: true,
-                            fillColor:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 24.0, 20.0, 24.0),
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          keyboardType: TextInputType.number,
-                          validator: _model.yourAgeControllerValidator
-                              .asValidator(context),
-                        ).animateOnPageLoad(
-                            animationsMap['textFieldOnPageLoadAnimation2']!),
+                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            keyboardType: TextInputType.number,
+                            validator: _model.yourAgeControllerValidator
+                                .asValidator(context),
+                          ).animateOnPageLoad(
+                              animationsMap['textFieldOnPageLoadAnimation2']!),
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 0.0),
-                        child: TextFormField(
-                          controller: _model.ailmentsController,
-                          focusNode: _model.ailmentsFocusNode,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Ailments',
-                            labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                            hintText: 'What types of allergies do you have..',
-                            hintStyle: FlutterFlowTheme.of(context).bodySmall,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                        child: AuthUserStreamWidget(
+                          builder: (context) => TextFormField(
+                            controller: _model.ailmentsController,
+                            focusNode: _model.ailmentsFocusNode,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Ailments',
+                              labelStyle:
+                                  FlutterFlowTheme.of(context).bodySmall,
+                              hintText: 'What types of allergies do you have..',
+                              hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 24.0, 20.0, 24.0),
                             ),
-                            filled: true,
-                            fillColor:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 24.0, 20.0, 24.0),
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          validator: _model.ailmentsControllerValidator
-                              .asValidator(context),
-                        ).animateOnPageLoad(
-                            animationsMap['textFieldOnPageLoadAnimation3']!),
+                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            validator: _model.ailmentsControllerValidator
+                                .asValidator(context),
+                          ).animateOnPageLoad(
+                              animationsMap['textFieldOnPageLoadAnimation3']!),
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -466,31 +478,36 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                           children: [
                             Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
-                              child: FlutterFlowRadioButton(
-                                options:
-                                    ['Male', 'Female', 'Undisclosed'].toList(),
-                                onChanged: (val) => setState(() {}),
-                                controller:
-                                    _model.radioButtonValueController ??=
-                                        FormFieldController<String>(null),
-                                optionHeight: 25.0,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodySmall,
-                                selectedTextStyle:
-                                    FlutterFlowTheme.of(context).bodyMedium,
-                                textPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 15.0, 0.0),
-                                buttonPosition: RadioButtonPosition.left,
-                                direction: Axis.horizontal,
-                                radioButtonColor:
-                                    FlutterFlowTheme.of(context).primary,
-                                inactiveRadioButtonColor:
-                                    FlutterFlowTheme.of(context).grayLight,
-                                toggleable: false,
-                                horizontalAlignment: WrapAlignment.center,
-                                verticalAlignment: WrapCrossAlignment.start,
-                              ).animateOnPageLoad(animationsMap[
-                                  'radioButtonOnPageLoadAnimation']!),
+                              child: AuthUserStreamWidget(
+                                builder: (context) => FlutterFlowRadioButton(
+                                  options: ['Male', 'Female', 'Undisclosed']
+                                      .toList(),
+                                  onChanged: (val) => setState(() {}),
+                                  controller:
+                                      _model.radioButtonValueController ??=
+                                          FormFieldController<String>(
+                                              valueOrDefault(
+                                                  currentUserDocument?.userSex,
+                                                  '')),
+                                  optionHeight: 25.0,
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).bodySmall,
+                                  selectedTextStyle:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  textPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 15.0, 0.0),
+                                  buttonPosition: RadioButtonPosition.left,
+                                  direction: Axis.horizontal,
+                                  radioButtonColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  inactiveRadioButtonColor:
+                                      FlutterFlowTheme.of(context).grayLight,
+                                  toggleable: false,
+                                  horizontalAlignment: WrapAlignment.center,
+                                  verticalAlignment: WrapCrossAlignment.start,
+                                ).animateOnPageLoad(animationsMap[
+                                    'radioButtonOnPageLoadAnimation']!),
+                              ),
                             ),
                           ],
                         ),
@@ -521,8 +538,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                                 await buttonLoginUsersRecord.reference
                                     .update(createUsersRecordData(
                                   displayName: _model.yourNameController.text,
-                                  age: int.tryParse(
-                                      _model.yourAgeController.text),
+                                  age: buttonLoginUsersRecord.age,
                                   ailments: _model.ailmentsController.text,
                                   userSex: _model.radioButtonValue,
                                 ));

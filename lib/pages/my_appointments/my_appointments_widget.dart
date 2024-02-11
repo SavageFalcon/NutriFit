@@ -123,12 +123,8 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
             Expanded(
               child: StreamBuilder<List<AppointmentsRecord>>(
                 stream: queryAppointmentsRecord(
-                  queryBuilder: (appointmentsRecord) => appointmentsRecord
-                      .where(
-                        'appointmentPerson',
-                        isEqualTo: currentUserReference,
-                      )
-                      .orderBy('mealTime', descending: true),
+                  queryBuilder: (appointmentsRecord) =>
+                      appointmentsRecord.orderBy('mealTime', descending: true),
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.

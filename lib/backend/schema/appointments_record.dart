@@ -86,6 +86,11 @@ class AppointmentsRecord extends FirestoreRecord {
   bool get needsProcessing => _needsProcessing ?? false;
   bool hasNeedsProcessing() => _needsProcessing != null;
 
+  // "recipieList" field.
+  String? _recipieList;
+  String get recipieList => _recipieList ?? '';
+  bool hasRecipieList() => _recipieList != null;
+
   void _initializeFields() {
     _appointmentName = snapshotData['appointmentName'] as String?;
     _appointmentDescription = snapshotData['appointmentDescription'] as String?;
@@ -102,6 +107,7 @@ class AppointmentsRecord extends FirestoreRecord {
     _mealDesc = snapshotData['mealDesc'] as String?;
     _mealImage = snapshotData['mealImage'] as String?;
     _needsProcessing = snapshotData['needsProcessing'] as bool?;
+    _recipieList = snapshotData['recipieList'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -153,6 +159,7 @@ Map<String, dynamic> createAppointmentsRecordData({
   String? mealDesc,
   String? mealImage,
   bool? needsProcessing,
+  String? recipieList,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -170,6 +177,7 @@ Map<String, dynamic> createAppointmentsRecordData({
       'mealDesc': mealDesc,
       'mealImage': mealImage,
       'needsProcessing': needsProcessing,
+      'recipieList': recipieList,
     }.withoutNulls,
   );
 
@@ -195,7 +203,8 @@ class AppointmentsRecordDocumentEquality
         e1?.proteinCount == e2?.proteinCount &&
         e1?.mealDesc == e2?.mealDesc &&
         e1?.mealImage == e2?.mealImage &&
-        e1?.needsProcessing == e2?.needsProcessing;
+        e1?.needsProcessing == e2?.needsProcessing &&
+        e1?.recipieList == e2?.recipieList;
   }
 
   @override
@@ -213,7 +222,8 @@ class AppointmentsRecordDocumentEquality
         e?.proteinCount,
         e?.mealDesc,
         e?.mealImage,
-        e?.needsProcessing
+        e?.needsProcessing,
+        e?.recipieList
       ]);
 
   @override

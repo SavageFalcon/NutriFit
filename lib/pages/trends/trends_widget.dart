@@ -32,21 +32,21 @@ class _TrendsWidgetState extends State<TrendsWidget>
       effects: [
         FadeEffect(
           curve: Curves.easeInOut,
-          delay: 100.ms,
+          delay: 200.ms,
           duration: 600.ms,
           begin: 0.0,
           end: 1.0,
         ),
         MoveEffect(
           curve: Curves.easeInOut,
-          delay: 100.ms,
+          delay: 200.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 20.0),
+          begin: Offset(0.0, 40.0),
           end: Offset(0.0, 0.0),
         ),
         ScaleEffect(
           curve: Curves.easeInOut,
-          delay: 100.ms,
+          delay: 200.ms,
           duration: 600.ms,
           begin: Offset(1.0, 0.0),
           end: Offset(1.0, 1.0),
@@ -67,7 +67,7 @@ class _TrendsWidgetState extends State<TrendsWidget>
           curve: Curves.easeInOut,
           delay: 200.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 40.0),
+          begin: Offset(0.0, 60.0),
           end: Offset(0.0, 0.0),
         ),
         ScaleEffect(
@@ -105,41 +105,12 @@ class _TrendsWidgetState extends State<TrendsWidget>
         ),
       ],
     ),
-    'textFieldOnPageLoadAnimation4': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 60.0),
-          end: Offset(0.0, 0.0),
-        ),
-        ScaleEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 600.ms,
-          begin: Offset(1.0, 0.0),
-          end: Offset(1.0, 1.0),
-        ),
-      ],
-    ),
   };
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => TrendsModel());
-
-    _model.yourNameController ??= TextEditingController();
-    _model.yourNameFocusNode ??= FocusNode();
 
     _model.yourAgeController ??= TextEditingController();
     _model.yourAgeFocusNode ??= FocusNode();
@@ -224,98 +195,6 @@ class _TrendsWidgetState extends State<TrendsWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 20.0, 20.0, 0.0),
                               child: TextFormField(
-                                controller: _model.yourNameController,
-                                focusNode: _model.yourNameFocusNode,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Weight',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                  hintText: 'lbs',
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  filled: true,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          20.0, 24.0, 20.0, 24.0),
-                                ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                                validator: _model.yourNameControllerValidator
-                                    .asValidator(context),
-                              ).animateOnPageLoad(animationsMap[
-                                  'textFieldOnPageLoadAnimation1']!),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 20.0, 0.0),
-                            child: FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
-                              },
-                              text: 'Submit',
-                              options: FFButtonOptions(
-                                height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color: Colors.white,
-                                    ),
-                                elevation: 3.0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 20.0, 20.0, 0.0),
-                              child: TextFormField(
                                 controller: _model.yourAgeController,
                                 focusNode: _model.yourAgeFocusNode,
                                 obscureText: false,
@@ -366,7 +245,7 @@ class _TrendsWidgetState extends State<TrendsWidget>
                                 validator: _model.yourAgeControllerValidator
                                     .asValidator(context),
                               ).animateOnPageLoad(animationsMap[
-                                  'textFieldOnPageLoadAnimation2']!),
+                                  'textFieldOnPageLoadAnimation1']!),
                             ),
                           ),
                           Padding(
@@ -458,7 +337,7 @@ class _TrendsWidgetState extends State<TrendsWidget>
                                 validator: _model.ailmentsController1Validator
                                     .asValidator(context),
                               ).animateOnPageLoad(animationsMap[
-                                  'textFieldOnPageLoadAnimation3']!),
+                                  'textFieldOnPageLoadAnimation2']!),
                             ),
                           ),
                           Padding(
@@ -550,7 +429,7 @@ class _TrendsWidgetState extends State<TrendsWidget>
                                 validator: _model.ailmentsController2Validator
                                     .asValidator(context),
                               ).animateOnPageLoad(animationsMap[
-                                  'textFieldOnPageLoadAnimation4']!),
+                                  'textFieldOnPageLoadAnimation3']!),
                             ),
                           ),
                           Padding(
@@ -595,7 +474,7 @@ class _TrendsWidgetState extends State<TrendsWidget>
                   onPressed: () {
                     print('Button pressed ...');
                   },
-                  text: 'Link to Apple Health [COMING SOON]',
+                  text: 'Link to Google Fit',
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:

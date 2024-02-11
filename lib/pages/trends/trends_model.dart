@@ -18,10 +18,6 @@ class TrendsModel extends FlutterFlowModel<TrendsWidget> {
   final unfocusNode = FocusNode();
   // Model for main_Logo component.
   late MainLogoModel mainLogoModel;
-  // State field(s) for yourName widget.
-  FocusNode? yourNameFocusNode;
-  TextEditingController? yourNameController;
-  String? Function(BuildContext, String?)? yourNameControllerValidator;
   // State field(s) for yourAge widget.
   FocusNode? yourAgeFocusNode;
   TextEditingController? yourAgeController;
@@ -44,9 +40,6 @@ class TrendsModel extends FlutterFlowModel<TrendsWidget> {
   void dispose() {
     unfocusNode.dispose();
     mainLogoModel.dispose();
-    yourNameFocusNode?.dispose();
-    yourNameController?.dispose();
-
     yourAgeFocusNode?.dispose();
     yourAgeController?.dispose();
 

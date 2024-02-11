@@ -579,8 +579,6 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                               .text,
                                           mealName:
                                               _model.personsNameController.text,
-                                          appointmentPerson:
-                                              currentUserReference,
                                           mealImage: _model.uploadedFileUrl,
                                           needsProcessing: true,
                                         ),
