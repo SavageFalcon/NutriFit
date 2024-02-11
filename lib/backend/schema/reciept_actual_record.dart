@@ -36,11 +36,17 @@ class RecieptActualRecord extends FirestoreRecord {
   String get desc => _desc ?? '';
   bool hasDesc() => _desc != null;
 
+  // "needsProcessing" field.
+  bool? _needsProcessing;
+  bool get needsProcessing => _needsProcessing ?? false;
+  bool hasNeedsProcessing() => _needsProcessing != null;
+
   void _initializeFields() {
     _person = snapshotData['person'] as DocumentReference?;
     _image = snapshotData['image'] as String?;
     _time = snapshotData['time'] as DateTime?;
     _desc = snapshotData['desc'] as String?;
+    _needsProcessing = snapshotData['needsProcessing'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -82,6 +88,7 @@ Map<String, dynamic> createRecieptActualRecordData({
   String? image,
   DateTime? time,
   String? desc,
+  bool? needsProcessing,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -89,6 +96,7 @@ Map<String, dynamic> createRecieptActualRecordData({
       'image': image,
       'time': time,
       'desc': desc,
+      'needsProcessing': needsProcessing,
     }.withoutNulls,
   );
 
@@ -104,12 +112,13 @@ class RecieptActualRecordDocumentEquality
     return e1?.person == e2?.person &&
         e1?.image == e2?.image &&
         e1?.time == e2?.time &&
-        e1?.desc == e2?.desc;
+        e1?.desc == e2?.desc &&
+        e1?.needsProcessing == e2?.needsProcessing;
   }
 
   @override
-  int hash(RecieptActualRecord? e) =>
-      const ListEquality().hash([e?.person, e?.image, e?.time, e?.desc]);
+  int hash(RecieptActualRecord? e) => const ListEquality()
+      .hash([e?.person, e?.image, e?.time, e?.desc, e?.needsProcessing]);
 
   @override
   bool isValidKey(Object? o) => o is RecieptActualRecord;

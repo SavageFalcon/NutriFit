@@ -559,6 +559,7 @@ class _EditBookingWidgetState extends State<EditBookingWidget>
                                           mealDesc: _model
                                               .problemDescriptionController
                                               .text,
+                                          needsProcessing: true,
                                         ),
                                         ...mapToFirestore(
                                           {

@@ -582,6 +582,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                           appointmentPerson:
                                               currentUserReference,
                                           mealImage: _model.uploadedFileUrl,
+                                          needsProcessing: true,
                                         ),
                                         ...mapToFirestore(
                                           {

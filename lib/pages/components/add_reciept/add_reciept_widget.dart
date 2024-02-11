@@ -488,6 +488,7 @@ class _AddRecieptWidgetState extends State<AddRecieptWidget>
                                               .text,
                                           person: currentUserReference,
                                           image: _model.uploadedFileUrl,
+                                          needsProcessing: true,
                                         ),
                                         ...mapToFirestore(
                                           {

@@ -488,6 +488,7 @@ class _AddfridgeWidgetState extends State<AddfridgeWidget>
                                               .text,
                                           image: _model.uploadedFileUrl,
                                           person: currentUserReference,
+                                          needsProcessing: true,
                                         ),
                                         ...mapToFirestore(
                                           {
