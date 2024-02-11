@@ -1,7 +1,7 @@
-# Nurafit
+# Nutrifit
 
-A new Flutter project.
+A comprehensive nutrition app, that can track ingredients you have, suggest recipies, scan reciepts, and estimate calories in dishes along with weight and calorie tracking.
 
 ## Getting Started
 
-FlutterFlow projects are built to run on the Flutter _stable_ release.
+Run on the Flutter _stable_ release.
