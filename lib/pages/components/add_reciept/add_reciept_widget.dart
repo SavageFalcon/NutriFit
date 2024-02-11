@@ -240,7 +240,7 @@ class _AddRecieptWidgetState extends State<AddRecieptWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 8.0, 0.0, 0.0),
                               child: Text(
-                                'Add Fridge Picture',
+                                'Add Reciept',
                                 style:
                                     FlutterFlowTheme.of(context).headlineSmall,
                               ),

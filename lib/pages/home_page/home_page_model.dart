@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/components/add_reciept/add_reciept_widget.dart';
-import '/pages/components/addfridge/addfridge_widget.dart';
 import '/pages/components/book_appointment/book_appointment_widget.dart';
 import '/pages/components/main_logo/main_logo_widget.dart';
 import 'home_page_widget.dart' show HomePageWidget;
