@@ -22,24 +22,24 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    match /users/{parent}/ingredients/{document} {
-      allow create: if request.auth.uid == parent;
+    match /IngredientsActual/{document} {
+      allow create: if true;
       allow read: if true;
-      allow write: if request.auth.uid == parent;
+      allow write: if false;
       allow delete: if false;
     }
 
-    match /users/{parent}/fridge/{document} {
-      allow create: if request.auth.uid == parent;
+    match /FridgeActual/{document} {
+      allow create: if true;
       allow read: if true;
-      allow write: if request.auth.uid == parent;
+      allow write: if false;
       allow delete: if false;
     }
 
-    match /users/{parent}/reciept/{document} {
-      allow create: if request.auth.uid == parent;
+    match /RecieptActual/{document} {
+      allow create: if true;
       allow read: if true;
-      allow write: if request.auth.uid == parent;
+      allow write: if false;
       allow delete: if false;
     }
   }

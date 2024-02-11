@@ -8,9 +8,9 @@ import 'schema/util/firestore_util.dart';
 import 'schema/users_record.dart';
 import 'schema/appointments_record.dart';
 import 'schema/asdfasdf_record.dart';
-import 'schema/ingredients_record.dart';
-import 'schema/fridge_record.dart';
-import 'schema/reciept_record.dart';
+import 'schema/ingredients_actual_record.dart';
+import 'schema/fridge_actual_record.dart';
+import 'schema/reciept_actual_record.dart';
 import 'dart:async';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -23,9 +23,9 @@ export 'schema/util/schema_util.dart';
 export 'schema/users_record.dart';
 export 'schema/appointments_record.dart';
 export 'schema/asdfasdf_record.dart';
-export 'schema/ingredients_record.dart';
-export 'schema/fridge_record.dart';
-export 'schema/reciept_record.dart';
+export 'schema/ingredients_actual_record.dart';
+export 'schema/fridge_actual_record.dart';
+export 'schema/reciept_actual_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -261,57 +261,133 @@ Future<FFFirestorePage<AsdfasdfRecord>> queryAsdfasdfRecordPage({
       return page;
     });
 
-/// Functions to query IngredientsRecords (as a Stream and as a Future).
-Future<int> queryIngredientsRecordCount({
-  DocumentReference? parent,
+/// Functions to query IngredientsActualRecords (as a Stream and as a Future).
+Future<int> queryIngredientsActualRecordCount({
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      IngredientsRecord.collection(parent),
+      IngredientsActualRecord.collection,
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<IngredientsRecord>> queryIngredientsRecord({
-  DocumentReference? parent,
+Stream<List<IngredientsActualRecord>> queryIngredientsActualRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      IngredientsRecord.collection(parent),
-      IngredientsRecord.fromSnapshot,
+      IngredientsActualRecord.collection,
+      IngredientsActualRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<IngredientsRecord>> queryIngredientsRecordOnce({
-  DocumentReference? parent,
+Future<List<IngredientsActualRecord>> queryIngredientsActualRecordOnce({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      IngredientsRecord.collection(parent),
-      IngredientsRecord.fromSnapshot,
+      IngredientsActualRecord.collection,
+      IngredientsActualRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
-Future<FFFirestorePage<IngredientsRecord>> queryIngredientsRecordPage({
-  DocumentReference? parent,
+Future<FFFirestorePage<IngredientsActualRecord>>
+    queryIngredientsActualRecordPage({
   Query Function(Query)? queryBuilder,
   DocumentSnapshot? nextPageMarker,
   required int pageSize,
   required bool isStream,
-  required PagingController<DocumentSnapshot?, IngredientsRecord> controller,
+  required PagingController<DocumentSnapshot?, IngredientsActualRecord>
+      controller,
+  List<StreamSubscription?>? streamSubscriptions,
+}) =>
+        queryCollectionPage(
+          IngredientsActualRecord.collection,
+          IngredientsActualRecord.fromSnapshot,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        ).then((page) {
+          controller.appendPage(
+            page.data,
+            page.nextPageMarker,
+          );
+          if (isStream) {
+            final streamSubscription =
+                (page.dataStream)?.listen((List<IngredientsActualRecord> data) {
+              data.forEach((item) {
+                final itemIndexes = controller.itemList!
+                    .asMap()
+                    .map((k, v) => MapEntry(v.reference.id, k));
+                final index = itemIndexes[item.reference.id];
+                final items = controller.itemList!;
+                if (index != null) {
+                  items.replaceRange(index, index + 1, [item]);
+                  controller.itemList = {
+                    for (var item in items) item.reference: item
+                  }.values.toList();
+                }
+              });
+            });
+            streamSubscriptions?.add(streamSubscription);
+          }
+          return page;
+        });
+
+/// Functions to query FridgeActualRecords (as a Stream and as a Future).
+Future<int> queryFridgeActualRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      FridgeActualRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<FridgeActualRecord>> queryFridgeActualRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      FridgeActualRecord.collection,
+      FridgeActualRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<FridgeActualRecord>> queryFridgeActualRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      FridgeActualRecord.collection,
+      FridgeActualRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+Future<FFFirestorePage<FridgeActualRecord>> queryFridgeActualRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+  required PagingController<DocumentSnapshot?, FridgeActualRecord> controller,
   List<StreamSubscription?>? streamSubscriptions,
 }) =>
     queryCollectionPage(
-      IngredientsRecord.collection(parent),
-      IngredientsRecord.fromSnapshot,
+      FridgeActualRecord.collection,
+      FridgeActualRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
@@ -323,7 +399,7 @@ Future<FFFirestorePage<IngredientsRecord>> queryIngredientsRecordPage({
       );
       if (isStream) {
         final streamSubscription =
-            (page.dataStream)?.listen((List<IngredientsRecord> data) {
+            (page.dataStream)?.listen((List<FridgeActualRecord> data) {
           data.forEach((item) {
             final itemIndexes = controller.itemList!
                 .asMap()
@@ -343,57 +419,53 @@ Future<FFFirestorePage<IngredientsRecord>> queryIngredientsRecordPage({
       return page;
     });
 
-/// Functions to query FridgeRecords (as a Stream and as a Future).
-Future<int> queryFridgeRecordCount({
-  DocumentReference? parent,
+/// Functions to query RecieptActualRecords (as a Stream and as a Future).
+Future<int> queryRecieptActualRecordCount({
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      FridgeRecord.collection(parent),
+      RecieptActualRecord.collection,
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<FridgeRecord>> queryFridgeRecord({
-  DocumentReference? parent,
+Stream<List<RecieptActualRecord>> queryRecieptActualRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      FridgeRecord.collection(parent),
-      FridgeRecord.fromSnapshot,
+      RecieptActualRecord.collection,
+      RecieptActualRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<FridgeRecord>> queryFridgeRecordOnce({
-  DocumentReference? parent,
+Future<List<RecieptActualRecord>> queryRecieptActualRecordOnce({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      FridgeRecord.collection(parent),
-      FridgeRecord.fromSnapshot,
+      RecieptActualRecord.collection,
+      RecieptActualRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
-Future<FFFirestorePage<FridgeRecord>> queryFridgeRecordPage({
-  DocumentReference? parent,
+Future<FFFirestorePage<RecieptActualRecord>> queryRecieptActualRecordPage({
   Query Function(Query)? queryBuilder,
   DocumentSnapshot? nextPageMarker,
   required int pageSize,
   required bool isStream,
-  required PagingController<DocumentSnapshot?, FridgeRecord> controller,
+  required PagingController<DocumentSnapshot?, RecieptActualRecord> controller,
   List<StreamSubscription?>? streamSubscriptions,
 }) =>
     queryCollectionPage(
-      FridgeRecord.collection(parent),
-      FridgeRecord.fromSnapshot,
+      RecieptActualRecord.collection,
+      RecieptActualRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
@@ -405,89 +477,7 @@ Future<FFFirestorePage<FridgeRecord>> queryFridgeRecordPage({
       );
       if (isStream) {
         final streamSubscription =
-            (page.dataStream)?.listen((List<FridgeRecord> data) {
-          data.forEach((item) {
-            final itemIndexes = controller.itemList!
-                .asMap()
-                .map((k, v) => MapEntry(v.reference.id, k));
-            final index = itemIndexes[item.reference.id];
-            final items = controller.itemList!;
-            if (index != null) {
-              items.replaceRange(index, index + 1, [item]);
-              controller.itemList = {
-                for (var item in items) item.reference: item
-              }.values.toList();
-            }
-          });
-        });
-        streamSubscriptions?.add(streamSubscription);
-      }
-      return page;
-    });
-
-/// Functions to query RecieptRecords (as a Stream and as a Future).
-Future<int> queryRecieptRecordCount({
-  DocumentReference? parent,
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      RecieptRecord.collection(parent),
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<RecieptRecord>> queryRecieptRecord({
-  DocumentReference? parent,
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      RecieptRecord.collection(parent),
-      RecieptRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<RecieptRecord>> queryRecieptRecordOnce({
-  DocumentReference? parent,
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      RecieptRecord.collection(parent),
-      RecieptRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-Future<FFFirestorePage<RecieptRecord>> queryRecieptRecordPage({
-  DocumentReference? parent,
-  Query Function(Query)? queryBuilder,
-  DocumentSnapshot? nextPageMarker,
-  required int pageSize,
-  required bool isStream,
-  required PagingController<DocumentSnapshot?, RecieptRecord> controller,
-  List<StreamSubscription?>? streamSubscriptions,
-}) =>
-    queryCollectionPage(
-      RecieptRecord.collection(parent),
-      RecieptRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      nextPageMarker: nextPageMarker,
-      pageSize: pageSize,
-      isStream: isStream,
-    ).then((page) {
-      controller.appendPage(
-        page.data,
-        page.nextPageMarker,
-      );
-      if (isStream) {
-        final streamSubscription =
-            (page.dataStream)?.listen((List<RecieptRecord> data) {
+            (page.dataStream)?.listen((List<RecieptActualRecord> data) {
           data.forEach((item) {
             final itemIndexes = controller.itemList!
                 .asMap()

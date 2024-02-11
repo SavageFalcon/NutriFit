@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -381,6 +382,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                             var selectedUploadedFiles =
                                                 <FFUploadedFile>[];
 
+                                            var downloadUrls = <String>[];
                                             try {
                                               selectedUploadedFiles =
                                                   selectedMedia
@@ -401,14 +403,28 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                                                     m.blurHash,
                                                               ))
                                                       .toList();
+
+                                              downloadUrls = (await Future.wait(
+                                                selectedMedia.map(
+                                                  (m) async => await uploadData(
+                                                      m.storagePath, m.bytes),
+                                                ),
+                                              ))
+                                                  .where((u) => u != null)
+                                                  .map((u) => u!)
+                                                  .toList();
                                             } finally {
                                               _model.isDataUploading = false;
                                             }
                                             if (selectedUploadedFiles.length ==
-                                                selectedMedia.length) {
+                                                    selectedMedia.length &&
+                                                downloadUrls.length ==
+                                                    selectedMedia.length) {
                                               setState(() {
                                                 _model.uploadedLocalFile =
                                                     selectedUploadedFiles.first;
+                                                _model.uploadedFileUrl =
+                                                    downloadUrls.first;
                                               });
                                             } else {
                                               setState(() {});
@@ -565,6 +581,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                               _model.personsNameController.text,
                                           appointmentPerson:
                                               currentUserReference,
+                                          mealImage: _model.uploadedFileUrl,
                                         ),
                                         ...mapToFirestore(
                                           {

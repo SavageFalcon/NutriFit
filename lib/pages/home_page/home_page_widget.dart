@@ -197,12 +197,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: StreamBuilder<List<AppointmentsRecord>>(
                       stream: queryAppointmentsRecord(
-                        queryBuilder: (appointmentsRecord) => appointmentsRecord
-                            .where(
-                              'appointmentPerson',
-                              isEqualTo: currentUserReference,
-                            )
-                            .orderBy('appointmentTime'),
+                        queryBuilder: (appointmentsRecord) =>
+                            appointmentsRecord.orderBy('appointmentTime'),
                         limit: 1,
                       ),
                       builder: (context, snapshot) {

@@ -9,8 +9,8 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "appointmentTime",
-          "order": "ASCENDING"
+          "fieldPath": "mealTime",
+          "order": "DESCENDING"
         }
       ]
     },
@@ -23,20 +23,8 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "mealTime",
-          "order": "DESCENDING"
-        }
-      ]
-    }
-  ],
-  "fieldOverrides": [
-    {
-      "collectionGroup": "ingredients",
-      "fieldPath": "Time",
-      "indexes": [
-        {
-          "order": "DESCENDING",
-          "queryScope": "COLLECTION_GROUP"
+          "fieldPath": "appointmentTime",
+          "order": "ASCENDING"
         }
       ]
     }

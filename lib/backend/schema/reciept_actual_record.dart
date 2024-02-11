@@ -8,13 +8,18 @@ import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class FridgeRecord extends FirestoreRecord {
-  FridgeRecord._(
+class RecieptActualRecord extends FirestoreRecord {
+  RecieptActualRecord._(
     DocumentReference reference,
     Map<String, dynamic> data,
   ) : super(reference, data) {
     _initializeFields();
   }
+
+  // "person" field.
+  DocumentReference? _person;
+  DocumentReference? get person => _person;
+  bool hasPerson() => _person != null;
 
   // "image" field.
   String? _image;
@@ -31,59 +36,56 @@ class FridgeRecord extends FirestoreRecord {
   String get desc => _desc ?? '';
   bool hasDesc() => _desc != null;
 
-  DocumentReference get parentReference => reference.parent.parent!;
-
   void _initializeFields() {
+    _person = snapshotData['person'] as DocumentReference?;
     _image = snapshotData['image'] as String?;
     _time = snapshotData['time'] as DateTime?;
     _desc = snapshotData['desc'] as String?;
   }
 
-  static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
-      parent != null
-          ? parent.collection('fridge')
-          : FirebaseFirestore.instance.collectionGroup('fridge');
+  static CollectionReference get collection =>
+      FirebaseFirestore.instance.collection('RecieptActual');
 
-  static DocumentReference createDoc(DocumentReference parent, {String? id}) =>
-      parent.collection('fridge').doc(id);
+  static Stream<RecieptActualRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => RecieptActualRecord.fromSnapshot(s));
 
-  static Stream<FridgeRecord> getDocument(DocumentReference ref) =>
-      ref.snapshots().map((s) => FridgeRecord.fromSnapshot(s));
+  static Future<RecieptActualRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => RecieptActualRecord.fromSnapshot(s));
 
-  static Future<FridgeRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then((s) => FridgeRecord.fromSnapshot(s));
-
-  static FridgeRecord fromSnapshot(DocumentSnapshot snapshot) => FridgeRecord._(
+  static RecieptActualRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      RecieptActualRecord._(
         snapshot.reference,
         mapFromFirestore(snapshot.data() as Map<String, dynamic>),
       );
 
-  static FridgeRecord getDocumentFromData(
+  static RecieptActualRecord getDocumentFromData(
     Map<String, dynamic> data,
     DocumentReference reference,
   ) =>
-      FridgeRecord._(reference, mapFromFirestore(data));
+      RecieptActualRecord._(reference, mapFromFirestore(data));
 
   @override
   String toString() =>
-      'FridgeRecord(reference: ${reference.path}, data: $snapshotData)';
+      'RecieptActualRecord(reference: ${reference.path}, data: $snapshotData)';
 
   @override
   int get hashCode => reference.path.hashCode;
 
   @override
   bool operator ==(other) =>
-      other is FridgeRecord &&
+      other is RecieptActualRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
 }
 
-Map<String, dynamic> createFridgeRecordData({
+Map<String, dynamic> createRecieptActualRecordData({
+  DocumentReference? person,
   String? image,
   DateTime? time,
   String? desc,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
+      'person': person,
       'image': image,
       'time': time,
       'desc': desc,
@@ -93,20 +95,22 @@ Map<String, dynamic> createFridgeRecordData({
   return firestoreData;
 }
 
-class FridgeRecordDocumentEquality implements Equality<FridgeRecord> {
-  const FridgeRecordDocumentEquality();
+class RecieptActualRecordDocumentEquality
+    implements Equality<RecieptActualRecord> {
+  const RecieptActualRecordDocumentEquality();
 
   @override
-  bool equals(FridgeRecord? e1, FridgeRecord? e2) {
-    return e1?.image == e2?.image &&
+  bool equals(RecieptActualRecord? e1, RecieptActualRecord? e2) {
+    return e1?.person == e2?.person &&
+        e1?.image == e2?.image &&
         e1?.time == e2?.time &&
         e1?.desc == e2?.desc;
   }
 
   @override
-  int hash(FridgeRecord? e) =>
-      const ListEquality().hash([e?.image, e?.time, e?.desc]);
+  int hash(RecieptActualRecord? e) =>
+      const ListEquality().hash([e?.person, e?.image, e?.time, e?.desc]);
 
   @override
-  bool isValidKey(Object? o) => o is FridgeRecord;
+  bool isValidKey(Object? o) => o is RecieptActualRecord;
 }

@@ -170,15 +170,16 @@ class _InventoryWidgetState extends State<InventoryWidget> {
               ),
               Expanded(
                 child: PagedListView<DocumentSnapshot<Object?>?,
-                    IngredientsRecord>(
+                    IngredientsActualRecord>(
                   pagingController: _model.setListViewController(
-                    IngredientsRecord.collection()
-                        .orderBy('Time', descending: true),
+                    IngredientsActualRecord.collection
+                        .orderBy('time', descending: true),
                   ),
                   padding: EdgeInsets.zero,
                   reverse: false,
                   scrollDirection: Axis.vertical,
-                  builderDelegate: PagedChildBuilderDelegate<IngredientsRecord>(
+                  builderDelegate:
+                      PagedChildBuilderDelegate<IngredientsActualRecord>(
                     // Customize what your widget looks like when it's loading the first page.
                     firstPageProgressIndicatorBuilder: (_) => Center(
                       child: SizedBox(
@@ -203,7 +204,7 @@ class _InventoryWidgetState extends State<InventoryWidget> {
                     ),
 
                     itemBuilder: (context, _, listViewIndex) {
-                      final listViewIngredientsRecord = _model
+                      final listViewIngredientsActualRecord = _model
                           .listViewPagingController!.itemList![listViewIndex];
                       return Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -234,7 +235,8 @@ class _InventoryWidgetState extends State<InventoryWidget> {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        listViewIngredientsRecord.ingredient,
+                                        listViewIngredientsActualRecord
+                                            .ingredient,
                                         style: FlutterFlowTheme.of(context)
                                             .headlineSmall,
                                       ),
@@ -245,7 +247,7 @@ class _InventoryWidgetState extends State<InventoryWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        await listViewIngredientsRecord
+                                        await listViewIngredientsActualRecord
                                             .reference
                                             .delete();
                                       },
@@ -266,8 +268,10 @@ class _InventoryWidgetState extends State<InventoryWidget> {
                                     children: [
                                       Expanded(
                                         child: AutoSizeText(
-                                          dateTimeFormat('yMMMd',
-                                              listViewIngredientsRecord.time!),
+                                          dateTimeFormat(
+                                              'yMMMd',
+                                              listViewIngredientsActualRecord
+                                                  .time!),
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall,
                                         ),

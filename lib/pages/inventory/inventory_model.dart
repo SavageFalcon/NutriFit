@@ -24,7 +24,7 @@ class InventoryModel extends FlutterFlowModel<InventoryWidget> {
   String? Function(BuildContext, String?)? searchFieldControllerValidator;
   // State field(s) for ListView widget.
 
-  PagingController<DocumentSnapshot?, IngredientsRecord>?
+  PagingController<DocumentSnapshot?, IngredientsActualRecord>?
       listViewPagingController;
   Query? listViewPagingQuery;
   List<StreamSubscription?> listViewStreamSubscriptions = [];
@@ -49,7 +49,8 @@ class InventoryModel extends FlutterFlowModel<InventoryWidget> {
 
   /// Additional helper methods are added here.
 
-  PagingController<DocumentSnapshot?, IngredientsRecord> setListViewController(
+  PagingController<DocumentSnapshot?, IngredientsActualRecord>
+      setListViewController(
     Query query, {
     DocumentReference<Object?>? parent,
   }) {
@@ -61,16 +62,17 @@ class InventoryModel extends FlutterFlowModel<InventoryWidget> {
     return listViewPagingController!;
   }
 
-  PagingController<DocumentSnapshot?, IngredientsRecord>
+  PagingController<DocumentSnapshot?, IngredientsActualRecord>
       _createListViewController(
     Query query,
     DocumentReference<Object?>? parent,
   ) {
-    final controller = PagingController<DocumentSnapshot?, IngredientsRecord>(
-        firstPageKey: null);
+    final controller =
+        PagingController<DocumentSnapshot?, IngredientsActualRecord>(
+            firstPageKey: null);
     return controller
       ..addPageRequestListener(
-        (nextPageMarker) => queryIngredientsRecordPage(
+        (nextPageMarker) => queryIngredientsActualRecordPage(
           queryBuilder: (_) => listViewPagingQuery ??= query,
           nextPageMarker: nextPageMarker,
           streamSubscriptions: listViewStreamSubscriptions,
