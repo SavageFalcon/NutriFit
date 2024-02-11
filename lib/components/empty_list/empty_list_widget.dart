@@ -30,6 +30,8 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EmptyListModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -57,7 +59,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'No Appointments!',
+                'No meals!',
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).headlineSmall,
               ),
@@ -72,7 +74,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
             children: [
               Expanded(
                 child: Text(
-                  'You are all caught! No appointments scheduled, need an appointment? Schedule one now.',
+                  'Add one now?',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodySmall,
                 ),
@@ -100,7 +102,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
                 },
               ).then((value) => safeSetState(() {}));
             },
-            text: 'Schedule',
+            text: 'Add',
             options: FFButtonOptions(
               width: 170.0,
               height: 50.0,

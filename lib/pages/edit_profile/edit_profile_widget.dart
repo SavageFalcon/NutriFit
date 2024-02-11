@@ -47,6 +47,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     _model.yourAgeFocusNode ??= FocusNode();
 
     _model.yourAilmentsFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

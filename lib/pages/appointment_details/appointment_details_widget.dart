@@ -34,6 +34,8 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AppointmentDetailsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -113,7 +115,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     children: [
                       Expanded(
                         child: Text(
-                          'Type of Appointment',
+                          'Type of Meal',
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ),
@@ -147,7 +149,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     children: [
                       Expanded(
                         child: Text(
-                          'What’s the problem?',
+                          'Nutrition?',
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ),

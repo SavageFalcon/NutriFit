@@ -30,6 +30,8 @@ class _FindSymptomsWidgetState extends State<FindSymptomsWidget> {
 
     _model.searchFieldController ??= TextEditingController();
     _model.searchFieldFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -57,7 +59,7 @@ class _FindSymptomsWidgetState extends State<FindSymptomsWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: false,
         title: Text(
-          'Symptoms',
+          'Recepies',
           style: FlutterFlowTheme.of(context).displaySmall,
         ),
         actions: [
@@ -92,14 +94,13 @@ class _FindSymptomsWidgetState extends State<FindSymptomsWidget> {
                         focusNode: _model.searchFieldFocusNode,
                         obscureText: false,
                         decoration: InputDecoration(
-                          labelText: 'Search symptoms…',
                           labelStyle: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
                                 fontFamily: 'Outfit',
                                 color: FlutterFlowTheme.of(context).grayLight,
                               ),
-                          hintText: 'Headache, heartburn etc...',
+                          hintText: 'Talk to ChatGPT',
                           hintStyle: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(

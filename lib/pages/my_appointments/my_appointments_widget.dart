@@ -30,6 +30,8 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyAppointmentsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -85,7 +87,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: false,
         title: Text(
-          'Appointments',
+          'Meals',
           style: FlutterFlowTheme.of(context).displaySmall,
         ),
         actions: [
@@ -112,7 +114,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    'My Appointments',
+                    'Most to Leat Recent:',
                     style: FlutterFlowTheme.of(context).bodySmall,
                   ),
                 ],
@@ -228,7 +230,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                                                   .fromSTEB(4.0, 0.0, 0.0, 0.0),
                                               child: Text(
                                                 listViewAppointmentsRecord
-                                                    .appointmentType,
+                                                    .mealName,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .headlineSmall,
@@ -250,7 +252,13 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                                                   4.0, 4.0, 4.0, 0.0),
                                           child: Text(
                                             valueOrDefault<String>(
-                                              'For ${appointmentCardAppointmentsRecord.appointmentName}',
+                                              '${formatNumber(
+                                                appointmentCardAppointmentsRecord
+                                                    .calorieCount,
+                                                formatType: FormatType.decimal,
+                                                decimalType:
+                                                    DecimalType.automatic,
+                                              )}Calories',
                                               'For AppointmentName',
                                             ),
                                             style: FlutterFlowTheme.of(context)
@@ -292,27 +300,11 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                                                       dateTimeFormat(
                                                           'MMMEd',
                                                           listViewAppointmentsRecord
-                                                              .appointmentTime!),
+                                                              .mealTime!),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyMedium,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(4.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: Text(
-                                                      dateTimeFormat(
-                                                          'jm',
-                                                          appointmentCardAppointmentsRecord
-                                                              .appointmentTime!),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall,
                                                     ),
                                                   ),
                                                 ],

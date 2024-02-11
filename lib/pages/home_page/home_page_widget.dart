@@ -35,6 +35,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -181,7 +183,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 8.0, 0.0, 0.0),
                           child: Text(
-                            'Your next appointment',
+                            'Recent Meals:',
                             style: FlutterFlowTheme.of(context).bodyMedium,
                           ),
                         ),
@@ -563,7 +565,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Book Appointment',
+                                                  'Add a Meal',
                                                   textAlign: TextAlign.start,
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -576,27 +578,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                 .alternate,
                                                         fontSize: 19.0,
                                                       ),
-                                                ),
-                                                Expanded(
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 8.0),
-                                                    child: AutoSizeText(
-                                                      'Schedule an appointment with our licensed professional.',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: Color(
-                                                                    0xB4FFFFFF),
-                                                              ),
-                                                    ),
-                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -661,7 +642,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Call the Office',
+                                                    'Add a Bill',
                                                     textAlign: TextAlign.start,
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -672,30 +653,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   .of(context)
                                                               .alternate,
                                                         ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  8.0),
-                                                      child: AutoSizeText(
-                                                        'Give us a call in order to schedule your appointment.',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Outfit',
-                                                                  color: Color(
-                                                                      0xB4FFFFFF),
-                                                                ),
-                                                      ),
-                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -762,7 +719,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Email Us',
+                                                    'Fridge Inventory',
                                                     textAlign: TextAlign.start,
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -773,30 +730,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   .of(context)
                                                               .alternate,
                                                         ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  8.0),
-                                                      child: AutoSizeText(
-                                                        'Send us an email and we will get back to you within 2 days.',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Outfit',
-                                                                  color: Color(
-                                                                      0xB4FFFFFF),
-                                                                ),
-                                                      ),
-                                                    ),
                                                   ),
                                                 ],
                                               ),

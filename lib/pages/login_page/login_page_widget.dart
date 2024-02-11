@@ -47,6 +47,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
 
     _model.passwordConfirmController ??= TextEditingController();
     _model.passwordConfirmFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -98,7 +100,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 100.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -117,15 +119,20 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                     height: 130.0,
                                     fit: BoxFit.fitHeight,
                                   ),
-                                if (!(Theme.of(context).brightness ==
-                                    Brightness.dark))
-                                  Image.asset(
-                                    'assets/images/logo_darkFull@2x.png',
-                                    width: 200.0,
-                                    height: 130.0,
-                                    fit: BoxFit.fitHeight,
-                                  ),
                               ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 25.0, 0.0, 0.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/fit.png',
+                                width: 250.0,
+                                height: 200.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           Expanded(

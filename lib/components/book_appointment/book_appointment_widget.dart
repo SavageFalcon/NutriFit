@@ -1,19 +1,16 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -24,9 +21,11 @@ class BookAppointmentWidget extends StatefulWidget {
   const BookAppointmentWidget({
     super.key,
     this.userProfile,
-  });
+    int? calorieCounter,
+  }) : this.calorieCounter = calorieCounter ?? 0;
 
   final DocumentReference? userProfile;
+  final int calorieCounter;
 
   @override
   State<BookAppointmentWidget> createState() => _BookAppointmentWidgetState();
@@ -52,84 +51,6 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
           delay: 0.ms,
           duration: 600.ms,
           begin: Offset(0.0, 9.0),
-          end: Offset(0.0, 0.0),
-        ),
-        ScaleEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(1.0, 0.0),
-          end: Offset(1.0, 1.0),
-        ),
-      ],
-    ),
-    'dropDownOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 40.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 40.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 20.0),
-          end: Offset(0.0, 0.0),
-        ),
-        ScaleEffect(
-          curve: Curves.easeInOut,
-          delay: 40.ms,
-          duration: 600.ms,
-          begin: Offset(1.0, 0.0),
-          end: Offset(1.0, 1.0),
-        ),
-      ],
-    ),
-    'textFieldOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 60.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 60.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 30.0),
-          end: Offset(0.0, 0.0),
-        ),
-        ScaleEffect(
-          curve: Curves.easeInOut,
-          delay: 60.ms,
-          duration: 600.ms,
-          begin: Offset(1.0, 0.0),
-          end: Offset(1.0, 1.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 90.0),
           end: Offset(0.0, 0.0),
         ),
         ScaleEffect(
@@ -167,7 +88,59 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
         ),
       ],
     ),
+    'textFieldOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 60.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 60.ms,
+          duration: 600.ms,
+          begin: Offset(0.0, 30.0),
+          end: Offset(0.0, 0.0),
+        ),
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 60.ms,
+          duration: 600.ms,
+          begin: Offset(1.0, 0.0),
+          end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
     'buttonOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.bounceOut,
+          delay: 150.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.bounceOut,
+          delay: 150.ms,
+          duration: 600.ms,
+          begin: Offset(0.0, 20.0),
+          end: Offset(0.0, 0.0),
+        ),
+        ScaleEffect(
+          curve: Curves.bounceOut,
+          delay: 150.ms,
+          duration: 600.ms,
+          begin: Offset(1.0, 0.0),
+          end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
+    'buttonOnPageLoadAnimation3': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         FadeEffect(
@@ -217,6 +190,8 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -292,7 +267,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 8.0, 0.0, 0.0),
                               child: Text(
-                                'Book Appointment',
+                                'Add Meal',
                                 style:
                                     FlutterFlowTheme.of(context).headlineSmall,
                               ),
@@ -305,35 +280,13 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 8.0, 0.0, 0.0),
                                     child: Text(
-                                      'Fill out the information below in order to book your appointment with our office.',
+                                      'Fill out the information below, or take a picture and have us fill it out for you!',
                                       style: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                     ),
                                   ),
                                 ),
                               ],
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 0.0),
-                              child: Text(
-                                'Emails will be sent to:',
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 4.0, 0.0, 12.0),
-                              child: Text(
-                                currentUserEmail,
-                                style: FlutterFlowTheme.of(context)
-                                    .titleMedium
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                    ),
-                              ),
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -346,7 +299,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                 focusNode: _model.personsNameFocusNode,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Booking For',
+                                  labelText: 'Meal Name',
                                   labelStyle:
                                       FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
@@ -400,46 +353,105 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 16.0, 0.0, 0.0),
-                              child: FlutterFlowDropDown<String>(
-                                controller: _model.dropDownValueController ??=
-                                    FormFieldController<String>(null),
-                                options: [
-                                  'Doctors Visit',
-                                  'Routine Checkup',
-                                  'Scan/Update'
-                                ],
-                                onChanged: (val) =>
-                                    setState(() => _model.dropDownValue = val),
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: 60.0,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
+                                  0.0, 24.0, 0.0, 20.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    child: Align(
+                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          final selectedMedia =
+                                              await selectMedia(
+                                            maxWidth: 1440.00,
+                                            maxHeight: 1080.00,
+                                            multiImage: false,
+                                          );
+                                          if (selectedMedia != null &&
+                                              selectedMedia.every((m) =>
+                                                  validateFileFormat(
+                                                      m.storagePath,
+                                                      context))) {
+                                            setState(() =>
+                                                _model.isDataUploading = true);
+                                            var selectedUploadedFiles =
+                                                <FFUploadedFile>[];
+
+                                            try {
+                                              selectedUploadedFiles =
+                                                  selectedMedia
+                                                      .map(
+                                                          (m) => FFUploadedFile(
+                                                                name: m
+                                                                    .storagePath
+                                                                    .split('/')
+                                                                    .last,
+                                                                bytes: m.bytes,
+                                                                height: m
+                                                                    .dimensions
+                                                                    ?.height,
+                                                                width: m
+                                                                    .dimensions
+                                                                    ?.width,
+                                                                blurHash:
+                                                                    m.blurHash,
+                                                              ))
+                                                      .toList();
+                                            } finally {
+                                              _model.isDataUploading = false;
+                                            }
+                                            if (selectedUploadedFiles.length ==
+                                                selectedMedia.length) {
+                                              setState(() {
+                                                _model.uploadedLocalFile =
+                                                    selectedUploadedFiles.first;
+                                              });
+                                            } else {
+                                              setState(() {});
+                                              return;
+                                            }
+                                          }
+                                        },
+                                        text: 'Take Photo',
+                                        options: FFButtonOptions(
+                                          width: double.infinity,
+                                          height: 50.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                          elevation: 0.0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'buttonOnPageLoadAnimation1']!),
                                     ),
-                                hintText: 'Type of Appointment',
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context).grayLight,
-                                  size: 15.0,
-                                ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                elevation: 3.0,
-                                borderColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                borderWidth: 2.0,
-                                borderRadius: 8.0,
-                                margin: EdgeInsetsDirectional.fromSTEB(
-                                    20.0, 4.0, 16.0, 4.0),
-                                hidesUnderline: true,
-                                isSearchable: false,
-                                isMultiSelect: false,
-                              ).animateOnPageLoad(animationsMap[
-                                  'dropDownOnPageLoadAnimation']!),
+                                  ),
+                                ],
+                              ),
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -449,13 +461,14 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                 focusNode: _model.problemDescriptionFocusNode,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'What\'s the problem?',
+                                  labelText:
+                                      'You can type any other info here, such as\n ingredients, calories, or brands',
                                   labelStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                      FlutterFlowTheme.of(context).bodyMedium,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
                                       width: 2.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
@@ -489,7 +502,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                           20.0, 24.0, 0.0, 24.0),
                                 ),
                                 style: FlutterFlowTheme.of(context).bodyMedium,
-                                textAlign: TextAlign.start,
+                                textAlign: TextAlign.justify,
                                 maxLines: 8,
                                 keyboardType: TextInputType.multiline,
                                 validator: _model
@@ -497,164 +510,6 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                     .asValidator(context),
                               ).animateOnPageLoad(animationsMap[
                                   'textFieldOnPageLoadAnimation2']!),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 16.0, 0.0, 0.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  await DatePicker.showDateTimePicker(
-                                    context,
-                                    showTitleActions: true,
-                                    onConfirm: (date) {
-                                      safeSetState(() {
-                                        _model.datePicked = date;
-                                      });
-                                    },
-                                    currentTime: getCurrentTimestamp,
-                                    minTime: getCurrentTimestamp,
-                                  );
-                                },
-                                child: Material(
-                                  color: Colors.transparent,
-                                  elevation: 0.0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Container(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.9,
-                                    height: 60.0,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      border: Border.all(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        20.0, 0.0, 0.0, 0.0),
-                                                child: Text(
-                                                  'Choose Date & Time',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        fontSize: 12.0,
-                                                      ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(20.0, 4.0,
-                                                                0.0, 0.0),
-                                                    child: Text(
-                                                      dateTimeFormat('MMMEd',
-                                                          _model.datePicked),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .tertiary,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(2.0, 4.0,
-                                                                0.0, 0.0),
-                                                    child: Text(
-                                                      dateTimeFormat('jm',
-                                                          _model.datePicked),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .tertiary,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 8.0, 0.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              FlutterFlowIconButton(
-                                                borderColor: Colors.transparent,
-                                                borderRadius: 30.0,
-                                                buttonSize: 46.0,
-                                                icon: Icon(
-                                                  Icons.date_range_outlined,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .grayLight,
-                                                  size: 20.0,
-                                                ),
-                                                onPressed: () {
-                                                  print(
-                                                      'IconButton pressed ...');
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ).animateOnPageLoad(animationsMap[
-                                  'containerOnPageLoadAnimation']!),
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -696,27 +551,27 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                       borderRadius: BorderRadius.circular(40.0),
                                     ),
                                   ).animateOnPageLoad(animationsMap[
-                                      'buttonOnPageLoadAnimation1']!),
+                                      'buttonOnPageLoadAnimation2']!),
                                   FFButtonWidget(
                                     onPressed: () async {
                                       await AppointmentsRecord.collection
                                           .doc()
-                                          .set(createAppointmentsRecordData(
-                                            appointmentType:
-                                                _model.dropDownValue,
-                                            appointmentTime: _model.datePicked,
-                                            appointmentName: _model
-                                                .personsNameController.text,
-                                            appointmentDescription: _model
-                                                .problemDescriptionController
-                                                .text,
-                                            appointmentEmail: currentUserEmail,
-                                            appointmentPerson:
-                                                currentUserReference,
-                                          ));
+                                          .set({
+                                        ...createAppointmentsRecordData(
+                                          mealDesc: _model
+                                              .problemDescriptionController
+                                              .text,
+                                        ),
+                                        ...mapToFirestore(
+                                          {
+                                            'mealTime':
+                                                FieldValue.serverTimestamp(),
+                                          },
+                                        ),
+                                      });
                                       context.pop();
                                     },
-                                    text: 'Book Now',
+                                    text: 'Add',
                                     options: FFButtonOptions(
                                       width: 170.0,
                                       height: 50.0,
@@ -742,7 +597,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                                       borderRadius: BorderRadius.circular(40.0),
                                     ),
                                   ).animateOnPageLoad(animationsMap[
-                                      'buttonOnPageLoadAnimation2']!),
+                                      'buttonOnPageLoadAnimation3']!),
                                 ],
                               ),
                             ),

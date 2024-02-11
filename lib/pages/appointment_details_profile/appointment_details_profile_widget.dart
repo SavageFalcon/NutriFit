@@ -34,6 +34,8 @@ class _AppointmentDetailsProfileWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => AppointmentDetailsProfileModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

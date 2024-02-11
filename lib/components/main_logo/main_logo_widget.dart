@@ -28,6 +28,8 @@ class _MainLogoWidgetState extends State<MainLogoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MainLogoModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -45,7 +47,7 @@ class _MainLogoWidgetState extends State<MainLogoWidget> {
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
             child: Image.asset(
-              'assets/images/health-ai_logoHorz_dark@3x.png',
+              'assets/images/fit.png',
               width: 120.0,
               height: 40.0,
               fit: BoxFit.fitWidth,

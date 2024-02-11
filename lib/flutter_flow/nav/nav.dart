@@ -104,11 +104,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ForgotPasswordWidget(),
         ),
         FFRoute(
-          name: 'addAnotherProfile',
-          path: '/addAnotherProfile',
-          builder: (context, params) => AddAnotherProfileWidget(),
-        ),
-        FFRoute(
           name: 'onboarding',
           path: '/onboarding',
           builder: (context, params) => OnboardingWidget(),
@@ -134,7 +129,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'appointmentDetails',
-          path: '/appointmentDetails',
+          path: '/mealDetails',
           builder: (context, params) => AppointmentDetailsWidget(
             appointmentDetails: params.getParam('appointmentDetails',
                 ParamType.DocumentReference, false, ['appointments']),
@@ -160,7 +155,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'findSymptoms',
-          path: '/findSymptoms',
+          path: '/findRecipes',
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'findSymptoms')
               : FindSymptomsWidget(),
@@ -172,6 +167,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             appointmentDetails: params.getParam('appointmentDetails',
                 ParamType.DocumentReference, false, ['appointments']),
           ),
+        ),
+        FFRoute(
+          name: 'Inventory',
+          path: '/inventory',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Inventory')
+              : InventoryWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
