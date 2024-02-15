@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'login_page_model.dart';
@@ -184,7 +183,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        0.0, 20.0, 0.0, 0.0),
+                                                        0.0, 50.0, 0.0, 0.0),
                                                 child: TextFormField(
                                                   controller: _model
                                                       .emailAddressLoginController,
@@ -482,61 +481,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8.0),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 20.0, 0.0, 24.0),
-                                                child: FFButtonWidget(
-                                                  onPressed: () async {
-                                                    GoRouter.of(context)
-                                                        .prepareAuthEvent();
-                                                    final user =
-                                                        await authManager
-                                                            .signInAnonymously(
-                                                                context);
-                                                    if (user == null) {
-                                                      return;
-                                                    }
-
-                                                    context.pushNamedAuth(
-                                                        'homePage',
-                                                        context.mounted);
-                                                  },
-                                                  text: 'Continue as Guest',
-                                                  options: FFButtonOptions(
-                                                    width: 230.0,
-                                                    height: 50.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                    elevation: 0.0,
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
                                                   ),
                                                 ),
                                               ),
@@ -980,52 +924,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                   ),
                                 ),
                               ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 16.0, 0.0, 16.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                GoRouter.of(context).prepareAuthEvent();
-                                final user =
-                                    await authManager.signInWithGoogle(context);
-                                if (user == null) {
-                                  return;
-                                }
-
-                                context.goNamedAuth(
-                                    'homePage', context.mounted);
-                              },
-                              text: 'Continue with Google',
-                              icon: FaIcon(
-                                FontAwesomeIcons.google,
-                                size: 20.0,
-                              ),
-                              options: FFButtonOptions(
-                                width: 230.0,
-                                height: 44.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                elevation: 0.0,
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(40.0),
-                                hoverColor: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                              ),
                             ),
                           ),
                         ],
